@@ -1,0 +1,100 @@
+var Clicked;
+var ClickedFace;
+var ClickedType;
+var Holding;
+var HoldingType;
+var Lifted;
+var Playa;
+var d;
+var dir;
+var entType;
+var i;
+var info;
+var loc;
+var nearbyEntities;
+
+
+function common(evt) {
+
+    Playa = (evt.getPlayer());
+
+    Holding = (Playa.getItemHeld());
+    try { // holding nothing !
+        HoldingType = (Holding.getType());
+    } catch(e) {
+        echo(Playa,e);
+        echo(Playa,Holding===null); // holding nothing?
+    }
+    ClickedFace = (Clicked.getFaceClicked());
+    ClickedType = (Clicked.getType());
+    //loc = (Playa.getLocation());
+    //dir = (loc.getDirection());
+    dir = Playa.getCardinalDirection();
+
+    //d = new Drone(Clicked.getLocation());
+    // just some information
+    echo(Playa,evt.toString());
+    echo(Playa,HoldingType);
+    echo(Playa,ClickedFace);
+    echo(Playa,ClickedType);
+}
+
+function TheForceLeft(evt) {
+    Clicked = (evt.getBlock());
+    common(evt);
+    if (HoldingType == (net.canarymod.api.inventory.ItemType.Sugar)) {
+        echo(Playa,'is sugar!');
+        //if (String(ClickedFace) == 'TOP') {
+        d=new Drone(Clicked.getLocation());
+        d.box((blocks.diamond));
+        //Lifted = ((Clicked.getLocation()).getWorld().spawnFallingBlock((Clicked.getLocation()), ClickedType, 0));
+        //Lifted.setVelocity(((new org.bukkit.util.Vector(0, 1, 0))));
+        // CanaryLib/src/main/java/net/canarymod/api/entity/FallingBlock.java
+        
+        var offset = new net.canarymod.api.world.position.Vector3D(0,1,1);
+        Lifted = Clicked.getWorld().setBlockAt(Clicked.getLocation(),ClickedType);
+        echo(Playa,Lifted);
+        //Lifted.setVelocity(((new net.canarymod.api.world.position.Vector3D(0,1,0))));
+        //}
+    }
+}
+
+function TheForceRight(evt) {
+    Clicked = (evt.getBlockClicked());
+    common(evt); 
+    nearbyEntities = (armorstand.entities(Playa, 10));
+    for (var i_index in nearbyEntities) {
+        i = nearbyEntities[i_index];
+        entType = (i.getType());
+        i.setVelocity(((new org.bukkit.util.Vector(((dir.getX()) * 1),  2, ((dir.getZ()) * 1)))));
+    }
+}
+exports.starwars_1 = function()  {
+    //(me).setResourcePack('http://mod.learntomod.com/editable_image_groups/carlosiscool-starwars.zip');
+    //events.when(('block.BlockBreakEvent'),(TheForce), me);
+    //events.blockDestroy(TheForce);
+    events.blockLeftClick(TheForceLeft);
+    events.blockRightClick(TheForceRight);
+    //events.when(('player.PlayerMoveEvent'),(onMove), me);
+    events.playerMove(onMove);
+}
+
+function onMove(info) {
+    Playa = (info.getPlayer());
+    Holding = (Playa.getItemInHand());
+    HoldingType = (Holding.getType());
+    if (HoldingType != (Material.SUGAR)) {
+        Lifted.setVelocity(((new org.bukkit.util.Vector(((dir.getX()) * 2), ((dir.getY()) * 2), ((dir.getZ()) * 2)))));
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
