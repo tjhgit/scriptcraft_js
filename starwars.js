@@ -70,11 +70,12 @@ function TheForce(evt) {
     //echo(Playa,ClickedFace);
     //echo(Playa,ClickedType);
 }
-
-exports.starwars = function() {
+// Aufrufen mit /js starwars(self)
+exports.starwars = function(player) {
     //(me).setResourcePack('http://mod.learntomod.com/editable_image_groups/carlosiscool-starwars.zip');
     //events.when(('block.BlockBreakEvent'),(TheForce), me);
     //events.blockBreak(TheForce);
+    player.setResourcePack('http://mod.learntomod.com/editable_image_groups/carlosiscool-starwars.zip');
     events.on(org.bukkit.event.player.PlayerInteractEvent,TheForce); // need to use events.on since event handler not declared
     //events.when(('player.PlayerMoveEvent'),(onMove), me);
     events.playerMove(onMove);
