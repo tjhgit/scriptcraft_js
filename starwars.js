@@ -15,7 +15,7 @@ function Lift(spieler) {
             //d.box(blocks.diamond);
             d.box(blocks.air);
             Lifted = Clicked.getLocation().getWorld().spawnFallingBlock(Clicked.getLocation(), ClickedType, 0);
-            Lifted.setVelocity(new org.bukkit.util.Vector(0, 0.8, 0));
+            Lifted.setVelocity(new org.bukkit.util.Vector(0, 1, 0));
             echo(spieler,'Lifting');
         }
     } else if (String(Button) == 'RIGHT_CLICK_BLOCK') {
@@ -98,7 +98,7 @@ function Lift(spieler) {
             if (HoldingType != org.bukkit.Material.SUGAR) {
                 if(Lifted != undefined) {
                     //Lifted.setVelocity(new org.bukkit.util.Vector(dir.getX() * 2, dir.getY() * 2, dir.getZ() * 2));
-                    Lifted.setVelocity(new org.bukkit.util.Vector(0, 0.2, 0));
+                    Lifted.setVelocity(new org.bukkit.util.Vector(0, 1, 0));
                 }
             }
         }
