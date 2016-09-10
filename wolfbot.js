@@ -15,25 +15,26 @@ var wolfbot = plugin('wolfbot',{
         return _store.players[player.name];
     },
     set_wolfbot: function(player,wolfbot,inventory){
-        _store.players[player.name] = {wolfbot:wolfbot,inventory:inventory};
+    	_store.players[player.name] = {wolfbot:wolfbot,inventory:inventory};
     },
 
     /* display the commands and what they do */
-		help: function(player){
-			player.sendMessage("Wolfwolfbot Help Menu: Available Commands \n\n");
-			player.sendMessage("Summon: Summons a new wolfwolfbot \n");
-			player.sendMessage("Dismiss: Dismisses your wolfwolfbot \n");
-			player.sendMessage("Stay: Tells your wolfwolfbot to stay \n");
-			player.sendMessage("Come: Tells your wolfwolfbot to come \n");
-			player.sendMessage("Pack: Displays the inventory of your wolfwolfbot's pack \n");
-		},
+    help: function(player){
+    	player.sendMessage("Wolfwolfbot Help Menu: Available Commands \n\n");
+    	player.sendMessage("Summon: Summons a new wolfwolfbot \n");
+    	player.sendMessage("Dismiss: Dismisses your wolfwolfbot \n");
+    	player.sendMessage("Stay: Tells your wolfwolfbot to stay \n");
+    	player.sendMessage("Come: Tells your wolfwolfbot to come \n");
+    	player.sendMessage("Pack: Displays the inventory of your wolfwolfbot's pack \n");
+    },
 
     /* summons your wolfbot */
     summon: function(player){
-        var world  = player.world
-        
-        // in case you already have one spawned
-        this.dismiss(player);
+    	var world  = player.world
+
+    	// in case you already have one spawned
+    	// TODO: this line does not work, why??
+        // this.dismiss(player);
         
         // place wolf two squares in front of you
         //var my_wolfbot = world.spawnCreature(player.getLocation().add(0,0,2), org.bukkit.entity.EntityType.WOLF);

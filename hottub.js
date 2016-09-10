@@ -67,4 +67,4 @@ function hottub(){
 function splash(){
 	sounds.liquidSplash
 }
-Drone.extend(HotTub);
+Drone.extend(hottub);
