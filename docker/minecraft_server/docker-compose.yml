@@ -1,0 +1,20 @@
+services:
+  my-minecraft-base:
+    build:
+      context: .
+      dockerfile: base.Dockerfile
+
+  my-minecraft:
+    build:
+      context: .
+      dockerfile: Dockerfile
+
+    ports:
+        - 25565:25565
+    volumes:
+      - /Users/thomas/git/own/scriptcraft_js/plugins:/minecraft/scriptcraft/plugins/pepsiONE
+      - /Users/thomas/git/own/scriptcraft_js/modules:/minecraft/scriptcraft/modules/pepsiONE
+    environment:
+      - ONLINE_MODE=true
+    # 2048M or 4096M or 8192M 
+    command: /start 8192M
